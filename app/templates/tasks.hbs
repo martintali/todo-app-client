@@ -1,1 +1,21 @@
-{{outlet}}
+<section id="todoapp">
+    <header id="header">
+        <h1>todos</h1>
+        <input type="text" id="new-todo" placeholder="What needs to be done?" value="{{newTitle}}" onblur={{action "createOne" value="target.value"}}/>
+        {{!-- {{input value=newTitle placeholder="board game name" value={{newTitle}} onblur={{action "createOne"}}}}
+        <button {{action 'createOne'}}>Create</button> --}}
+    </header>
+    <section id="main">
+        <ul id="todo-list">
+            {{#each model as |task|}}
+                <li class="{{if task.completed 'completed'}}">
+                    <input type="checkbox" class="toggle" {{action "toggleCompleted" task}}>
+                    <label>{{task.name}}</label>
+                    <button class="destroy" {{action "delete" task}}></button>
+                </li>
+            {{/each}}
+            </ul>
+
+        <input type="checkbox" id="toggle-all">
+    </section>
+</section>
