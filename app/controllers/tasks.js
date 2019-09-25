@@ -12,10 +12,9 @@ export default Controller.extend({
 
             this.set('newTitle', '');
             let self = this;
-            todo.save().then(self.transitionToRoute('tasks'));
+            todo.save();
         },
         toggleCompleted(task) {
-            console.log(task.get('id'));
             task.set('completed', !task.get('completed'));
             task.save();
         },
