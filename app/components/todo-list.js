@@ -29,5 +29,8 @@ export default Component.extend({
   remaining: computed('todos.@each.completed', function() {
     let todos = this.get('todos');
     return todos.filterBy('completed', false).length;
+  }),
+  inflection: computed('remaining', function() {
+    return this.get('remaining') === 1 ? 'item' : 'items';
   })
 });
