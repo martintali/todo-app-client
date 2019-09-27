@@ -1,37 +1,32 @@
 <section id="todoapp">
   <header id="header">
-    <h1>todos</h1>
-    <input type="text" id="new-todo" placeholder="What needs to be done?" value={{newTitle}} onblur={{action "createOne" value="target.value"}}>
+    <h1>משימות</h1>
+    <input type="text" id="new-todo" placeholder="מה צריך לעשות?" value={{newTitle}} onkeydown={{action "createOne"}}>
   </header>
   <section id="main">
     <ul id="todo-list">
       {{#each todos as |task|}}
-        <li class={{if task.completed "completed"}}>
-          <input type="checkbox" class="toggle" {{action "toggleCompleted" task}}>
-          <label>{{task.name}}</label>
-          <button class="destroy" {{action "delete" task}}/>
+        <li class="task {{if task.completed "completed"}} {{if task.isEditing "editing"}}">
+          {{#if task.isEditing}}
+            <input type="text" class="edit" id="new-todo-edit" placeholder="מה צריך לעשות?" value={{newTitle}} onkeydown={{action "editTask" task}}>
+          {{else}}
+            <input type="checkbox" class="toggle2" {{action "toggleCompleted" task}}>
+            <label {{action "editTodo" task on="doubleClick"}}>{{task.name}}</label>
+            <button class="destroy2" {{action "delete" task}}/>
+          {{/if}}
         </li>
       {{/each}}
     </ul>
-
-    <input type="checkbox" id="toggle-all">
   </section>
   <footer id="footer">
     <span id="todo-count">
-      <strong>{{remaining}}</strong> {{inflection}} left</span>
-    <ul id="filters">
-      <li>
-        <a href="all" class="selected">All</a>
-      </li>
-      <li>
-        <a href="active">Active</a>
-      </li>
-      <li>
-        <a href="completed">Completed</a>
-      </li>
-    </ul>
-    <button id="clear-completed">
-      Clear completed (1)
-    </button>
+      <strong>{{remaining}}</strong> לסיום
+    </span>
+    <span id="completed-count">
+      <strong>{{completed}}</strong> הושלמו
+    </span>
+    <span id="total-count">
+      <strong>{{total}}</strong> סה''כ
+    </span>
   </footer>
 </section>
